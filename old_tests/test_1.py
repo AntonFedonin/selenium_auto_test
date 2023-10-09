@@ -7,19 +7,19 @@ with open("testdata.yaml") as f:
 site = Site(testdata["address"])
 
 
-# def test_step1(x_selector1, x_selector2, x_selector3, btn_selector, error_code):
-#     input1 = site.find_element("xpath", x_selector1)
-#     input1.send_keys("test")
-#
-#     input2 = site.find_element("xpath", x_selector2)
-#     input2.send_keys("1234")
-#
-#     btn = site.find_element("css", btn_selector)
-#     btn.click()
-#
-#     err_label = site.find_element("xpath", x_selector3).text
-#
-#     assert err_label == error_code, "Test 1 FAIL"
+def test_step1(x_selector1, x_selector2, x_selector3, btn_selector, error_code):
+    input1 = site.find_element("xpath", x_selector1)
+    input1.send_keys("test")
+
+    input2 = site.find_element("xpath", x_selector2)
+    input2.send_keys("1234")
+
+    btn = site.find_element("css", btn_selector)
+    btn.click()
+
+    err_label = site.find_element("xpath", x_selector3).text
+
+    assert err_label == error_code, "Test 1 FAIL"
 
 
 def test_step2(x_selector1, x_selector2, x_selector4, btn_selector, hello_code):
