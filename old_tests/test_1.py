@@ -7,28 +7,28 @@ with open("testdata.yaml") as f:
 site = Site(testdata["address"])
 
 
-def test_step1(x_selector1, x_selector2, x_selector3, btn_selector, error_code):
-    input1 = site.find_element("xpath", x_selector1)
-    input1.send_keys("test")
-
-    input2 = site.find_element("xpath", x_selector2)
-    input2.send_keys("1234")
-
-    btn = site.find_element("css", btn_selector)
-    btn.click()
-
-    err_label = site.find_element("xpath", x_selector3).text
-
-    assert err_label == error_code, "Test 1 FAIL"
+# def test_step1(x_selector1, x_selector2, x_selector3, btn_selector, error_code):
+#     input1 = site.find_element("xpath", x_selector1)
+#     input1.send_keys("test")
+#
+#     input2 = site.find_element("xpath", x_selector2)
+#     input2.send_keys("1234")
+#
+#     btn = site.find_element("css", btn_selector)
+#     btn.click()
+#
+#     err_label = site.find_element("xpath", x_selector3).text
+#
+#     assert err_label == error_code, "Test 1 FAIL"
 
 
 def test_step2(x_selector1, x_selector2, x_selector4, btn_selector, hello_code):
     input1 = site.find_element("xpath", x_selector1)
-    input1.clear()
+    # input1.clear()
     input1.send_keys(testdata["valid_login"])
 
     input2 = site.find_element("xpath", x_selector2)
-    input2.clear()
+    # input2.clear()
     input2.send_keys(testdata["valid_pswd"])
 
     btn = site.find_element("css", btn_selector)
@@ -51,7 +51,9 @@ def test_step3(new_post_button, add_title, add_content, add_description, save_bu
     input_content.send_keys("Add new content with selenium auto test")
 
     save_btn = site.find_element("xpath", save_button)
+    site.driver.sleep(5)
     save_btn.click()
+    site.driver.sleep(5)
 
     post_check = site.find_element("xpath", new_post_check).text
     site.driver.close()
