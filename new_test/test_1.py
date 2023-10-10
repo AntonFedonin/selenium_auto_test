@@ -1,55 +1,51 @@
 from testsite import OperationHelper
+import yaml
 
+with open("testdata.yaml") as f:
+    testdata = yaml.safe_load(f)
 
 
 def test_step1(browser):
-    testpage = OperationHelper(browser)
-
-    testpage.go_to_site()
-    testpage.enter_login("test")
-    testpage.enter_login("test")
-
-    testpage.click_login_button()
-
-    assert testpage.get_error_text() == "401"
+    testsite = OperationHelper(browser)
+    testsite.go_to_site()
+    testsite.enter_login("test")
+    testsite.enter_pass("test")
+    testsite.click_login_button()
+    assert testsite.get_error_text() == "401"
 
 
-# def test_step2(x_selector1, x_selector2, x_selector4, btn_selector, hello_code):
-#     input1 = site.find_element("xpath", x_selector1)
-#     # input1.clear()
-#     input1.send_keys(testdata["valid_login"])
-#
-#     input2 = site.find_element("xpath", x_selector2)
-#     # input2.clear()
-#     input2.send_keys(testdata["valid_pswd"])
-#
-#     btn = site.find_element("css", btn_selector)
-#     btn.click()
-#
-#     username = site.find_element("xpath", x_selector4).text
-#     assert username == hello_code
-#
-#
-# def test_step3(new_post_button, add_title, add_content, add_description, save_button, new_post_check):
-#     post_btn = site.find_element("xpath", new_post_button)
-#     post_btn.click()
-#     input_title = site.find_element("xpath", add_title)
-#     input_title.send_keys("New test post")
-#
-#     input_description = site.find_element("xpath", add_description)
-#     input_description.send_keys("New post test selenium")
-#
-#     input_content = site.find_element("xpath", add_content)
-#     input_content.send_keys("Add new content with selenium auto test")
-#
-#     save_btn = site.find_element("xpath", save_button)
-#     site.driver.sleep(5)
-#     save_btn.click()
-#     site.driver.sleep(5)
-#
-#     post_check = site.find_element("xpath", new_post_check).text
-#     site.driver.close()
-#     assert post_check == "New test post"
+def test_step2(browser):
+    testsite = OperationHelper(browser)
+    testsite.go_to_site()
+    testsite.enter_login(testdata["valid_login"])
+    testsite.enter_pass(testdata["valid_pass"])
+    testsite.click_login_button()
+
+    assert testsite.get_login_name_text() == f'Hello, {testdata["valid_login"]}'
 
 
+def test_step3(browser):
+    testsite = OperationHelper(browser)
+    testsite.click_new_post_button()
+    testsite.add_title("Hello world")
+    testsite.add_description("New test, new word")
+    testsite.add_content("Запускаю новый автотест. Возможно сработает, но это не точно")
+    testsite.click_save_post_button()
+    assert testsite.get_post_title_text() == "Create Post"
 
+
+def test_step4(browser):
+    testsite = OperationHelper(browser)
+    testsite.go_to_contact()
+    print(testsite.get_contact_us_text())
+    assert testsite.get_contact_us_text() == "Contact us!"
+
+
+def test_step5(browser):
+    testsite = OperationHelper(browser)
+    # testsite.go_to_contact()
+    testsite.enter_contact_name("Test")
+    testsite.enter_contact_email("123@mail.ru")
+    testsite.enter_content_in_contact("Enter test content")
+    testsite.click_contact_us_button()
+    print(testsite.get_alert_text())
