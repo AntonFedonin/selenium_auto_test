@@ -1,3 +1,5 @@
+import time
+
 from BaseApp import BasePage
 from selenium.webdriver.common.by import By
 
@@ -14,12 +16,13 @@ class TestSearchLocators:
     LOCATOR_ADD_CONTENT = (By.XPATH, """//*[@id="create-item"]/div/div/div[3]/div/label/span/textarea""")
     LOCATOR_SAVE_POST_BTN = (By.XPATH, """//*[@id="create-item"]/div/div/div[7]/div/button/span""")
     LOCATOR_CREATE_POST_CHECK = (By.XPATH, """//*[@id="app"]/main/div/div[1]/h1""")
-    LOCATOR_CONTACT_US_BTN = (By.XPATH,"""//*[@id="app"]/main/nav/ul/li[2]/a""")
+    LOCATOR_CONTACT_US_BTN = (By.XPATH, """//*[@id="app"]/main/nav/ul/li[2]/a""")
     LOCATOR_CONTACT_US_TEXT = (By.XPATH, """//*[@id="app"]/main/div/div/h1""")
     LOCATOR_YOUR_NAME_FIELD = (By.XPATH, """//*[@id="contact"]/div[1]/label/input""")
     LOCATOR_YOUR_EMAIL_FIELD = (By.XPATH, """//*[@id="contact"]/div[2]/label/input""")
     LOCATOR_CONTENT_IN_CONTACT_FIELD = (By.XPATH, """//*[@id="contact"]/div[3]/label/span/textarea""")
-    LOCATOR_ADD_CONTACT_BTN = (By.XPATH, """//*[@id="contact"]/div[4]/button/div""")
+    LOCATOR_ADD_CONTACT_BTN = (By.XPATH, """//*[@id="contact"]/div[4]/button/span""")
+    LOCATOR_ALERT = (By.XPATH, """//*[@id="contact"]/div[4]/button""")
 
 
 class OperationHelper(BasePage):
@@ -63,35 +66,29 @@ class OperationHelper(BasePage):
         return login_name_field.text
 
     def get_post_title_text(self):
-        post_title_field = self.find_element(TestSearchLocators.LOCATOR_CREATE_POST_CHECK, time=10)
+        post_title_field = self.find_element(TestSearchLocators.LOCATOR_CREATE_POST_CHECK, time=5)
         return post_title_field.text
 
     def go_to_contact(self):
         self.find_element(TestSearchLocators.LOCATOR_CONTACT_US_BTN).click()
 
     def get_contact_us_text(self):
-        contact_text = self.find_element(TestSearchLocators.LOCATOR_CONTACT_US_TEXT, time=5)
+        contact_text = self.find_element(TestSearchLocators.LOCATOR_CONTACT_US_TEXT)
         return contact_text.text
 
     def enter_contact_name(self, name):
-        contact_name = self.find_element(TestSearchLocators.LOCATOR_YOUR_NAME_FIELD)
+        contact_name = self.find_element(TestSearchLocators.LOCATOR_YOUR_NAME_FIELD, time=5)
         contact_name.send_keys(name)
 
     def enter_contact_email(self, email):
-        contact_email = self.find_element(TestSearchLocators.LOCATOR_YOUR_EMAIL_FIELD)
+        contact_email = self.find_element(TestSearchLocators.LOCATOR_YOUR_EMAIL_FIELD, time=5)
         contact_email.send_keys(email)
 
     def enter_content_in_contact(self, text):
-        content = self.find_element(TestSearchLocators.LOCATOR_CONTENT_IN_CONTACT_FIELD)
+        content = self.find_element(TestSearchLocators.LOCATOR_CONTENT_IN_CONTACT_FIELD, time=5)
         content.send_keys(text)
 
     def click_contact_us_button(self):
         self.find_element(TestSearchLocators.LOCATOR_ADD_CONTACT_BTN).click()
-
-    def get_alert_text(self):
-        alert = self.driver.switch_to_alert
+        alert = self.driver.switch_to.alert
         return alert.text
-
-
-
-

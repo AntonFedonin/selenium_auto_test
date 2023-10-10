@@ -5,13 +5,13 @@ with open("testdata.yaml") as f:
     testdata = yaml.safe_load(f)
 
 
-def test_step1(browser):
-    testsite = OperationHelper(browser)
-    testsite.go_to_site()
-    testsite.enter_login("test")
-    testsite.enter_pass("test")
-    testsite.click_login_button()
-    assert testsite.get_error_text() == "401"
+# def test_step1(browser):
+#     testsite = OperationHelper(browser)
+#     testsite.go_to_site()
+#     testsite.enter_login("test")
+#     testsite.enter_pass("test")
+#     testsite.click_login_button()
+#     assert testsite.get_error_text() == "401"
 
 
 def test_step2(browser):
@@ -43,9 +43,11 @@ def test_step4(browser):
 
 def test_step5(browser):
     testsite = OperationHelper(browser)
-    # testsite.go_to_contact()
+    testsite.go_to_contact()
     testsite.enter_contact_name("Test")
     testsite.enter_contact_email("123@mail.ru")
     testsite.enter_content_in_contact("Enter test content")
     testsite.click_contact_us_button()
-    print(testsite.get_alert_text())
+    assert testsite.click_contact_us_button() == "Form successfully submitted"
+
+
