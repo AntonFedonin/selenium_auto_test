@@ -15,5 +15,7 @@ xpath:
     LOCATOR_YOUR_EMAIL_FIELD: //*[@id="contact"]/div[2]/label/input
     LOCATOR_CONTENT_IN_CONTACT_FIELD: //*[@id="contact"]/div[3]/label/span/textarea
     LOCATOR_ADD_CONTACT_BTN: //*[@id="contact"]/div[4]/button/span
+    LOCATOR_ALERT: //*[@id="contact"]/div[4]/button
+
   css:
     LOCATOR_LOGIN_BTN: button
